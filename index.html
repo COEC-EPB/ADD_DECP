@@ -1,0 +1,1714 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>ADD - Início</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    :root{
+      --primary:#0097CE;
+      --primary-dark:#007fb0;
+      --orange:#F36F21;
+      --bg:#f4f6f8;
+      --card:#fff;
+      --text:#333;
+      --border:#e0e0e0;
+      --danger:#b3261e;
+      --success:#137333;
+      --warning:#b26a00;
+      --muted:#6b7280;
+      --holiday:#fff4e8;
+      --weekend:#faf7f7;
+      --today:#e8f6fd;
+      --day-hover:#f0f9ff;
+      --shadow:0 6px 20px rgba(0,0,0,.08);
+      --radius:16px;
+
+      --filled-bg:#e9f9ef;
+      --filled-border:#22c55e;
+      --blocked-bg:#fdecec;
+      --blocked-border:#ef4444;
+
+      --chip-almoco-bg:#dcfce7;
+      --chip-almoco-text:#166534;
+      --chip-almoco-border:#86efac;
+
+      --chip-janta-bg:#dbeafe;
+      --chip-janta-text:#1d4ed8;
+      --chip-janta-border:#93c5fd;
+
+      --chip-extra-bg:#fff7ed;
+      --chip-extra-text:#c2410c;
+      --chip-extra-border:#fdba74;
+    }
+
+    *{ box-sizing:border-box; }
+
+    html, body{
+      overflow-x:hidden;
+    }
+
+    body{
+      margin:0;
+      font-family:"Segoe UI", Arial, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+    }
+
+    header{
+      background:var(--card);
+      padding:16px 24px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+      box-shadow:0 2px 8px rgba(0,0,0,.08);
+      position:sticky;
+      top:0;
+      z-index:20;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+    }
+
+    .brand .logo{
+      width:44px;
+      height:44px;
+      border-radius:12px;
+      background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#fff;
+      font-size:22px;
+      box-shadow:0 6px 14px rgba(0,151,206,.25);
+      flex:0 0 44px;
+    }
+
+    .brand h1{
+      margin:0;
+      font-size:20px;
+      color:var(--primary);
+      line-height:1.2;
+      word-break:break-word;
+    }
+
+    .brand p{
+      margin:2px 0 0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.35;
+    }
+
+    .header-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      min-width:0;
+    }
+
+    button, .btn-link{
+      border:none;
+      border-radius:12px;
+      padding:10px 14px;
+      font-size:14px;
+      cursor:pointer;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      white-space:nowrap;
+      min-height:42px;
+    }
+
+    button.secondary, .btn-link{
+      background:#fff;
+      color:#333;
+      border:1px solid var(--border);
+    }
+
+    button.secondary:hover, .btn-link:hover{
+      background:#f8fafc;
+    }
+
+    main{
+      padding:22px;
+      display:grid;
+      grid-template-columns: 360px minmax(0, 1fr);
+      gap:18px;
+      align-items:start;
+    }
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      min-width:0;
+    }
+
+    .pad{
+      padding:16px;
+    }
+
+    .sidebar{
+      display:grid;
+      gap:16px;
+      position:sticky;
+      top:92px;
+      min-width:0;
+    }
+
+    .kpi-grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:12px;
+    }
+
+    .kpi{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+      padding:14px;
+      min-width:0;
+    }
+
+    .kpi .label{
+      font-size:12px;
+      color:#666;
+      font-weight:700;
+      margin-bottom:8px;
+      text-transform:uppercase;
+      letter-spacing:.2px;
+      line-height:1.3;
+    }
+
+    .kpi .value{
+      font-size:28px;
+      line-height:1;
+      font-weight:900;
+      color:#111827;
+      word-break:break-word;
+    }
+
+    .kpi .sub{
+      margin-top:8px;
+      font-size:12px;
+      color:#6b7280;
+      line-height:1.45;
+    }
+
+    .detail-panel{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+      padding:16px;
+      min-width:0;
+    }
+
+    .detail-panel h3{
+      margin:0 0 12px;
+      font-size:16px;
+      color:var(--primary);
+      display:flex;
+      align-items:center;
+      gap:8px;
+      line-height:1.3;
+      word-break:break-word;
+    }
+
+    .detail-empty{
+      font-size:13px;
+      color:#6b7280;
+      line-height:1.6;
+    }
+
+    .detail-list{
+      display:grid;
+      gap:10px;
+    }
+
+    .detail-item{
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:12px;
+      background:#fafafa;
+      min-width:0;
+    }
+
+    .detail-item-label{
+      font-size:11px;
+      font-weight:800;
+      color:#6b7280;
+      margin-bottom:4px;
+      text-transform:uppercase;
+      letter-spacing:.2px;
+      line-height:1.3;
+    }
+
+    .detail-item-value{
+      font-size:14px;
+      font-weight:700;
+      color:#111827;
+      line-height:1.45;
+      word-break:break-word;
+      overflow-wrap:anywhere;
+    }
+
+    .detail-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:8px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:800;
+      border:1px solid var(--border);
+      width:max-content;
+      max-width:100%;
+      flex-wrap:wrap;
+    }
+
+    .detail-badge.almoco{
+      background:var(--chip-almoco-bg);
+      color:var(--chip-almoco-text);
+      border-color:var(--chip-almoco-border);
+    }
+
+    .detail-badge.janta{
+      background:var(--chip-janta-bg);
+      color:var(--chip-janta-text);
+      border-color:var(--chip-janta-border);
+    }
+
+    .detail-badge.extra{
+      background:var(--chip-extra-bg);
+      color:var(--chip-extra-text);
+      border-color:var(--chip-extra-border);
+    }
+
+    .legend{
+      display:grid;
+      gap:10px;
+    }
+
+    .legend h3{
+      margin:0 0 6px;
+      font-size:15px;
+      color:var(--primary);
+    }
+
+    .legend-item{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-size:13px;
+      color:#444;
+      line-height:1.4;
+    }
+
+    .legend-swatch{
+      width:16px;
+      height:16px;
+      border-radius:5px;
+      border:1px solid rgba(0,0,0,.08);
+      flex:0 0 16px;
+    }
+
+    .calendar-wrap{
+      display:grid;
+      gap:14px;
+      min-width:0;
+    }
+
+    .calendar-toolbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+      padding:16px;
+      border-bottom:1px solid var(--border);
+      background:#fff;
+    }
+
+    .calendar-left{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      min-width:0;
+    }
+
+    .calendar-title{
+      font-size:24px;
+      font-weight:900;
+      color:#1f2937;
+      min-width:220px;
+      line-height:1.2;
+      word-break:break-word;
+    }
+
+    .calendar-subtitle{
+      font-size:13px;
+      color:#6b7280;
+      line-height:1.35;
+    }
+
+    .toolbar-group{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      min-width:0;
+    }
+
+    select{
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:10px 12px;
+      background:#fff;
+      font-size:14px;
+      outline:none;
+      min-height:42px;
+    }
+
+    .status{
+      font-size:13px;
+      color:#666;
+      min-height:18px;
+      line-height:1.4;
+    }
+
+    .status.success{ color:var(--success); }
+    .status.error{ color:var(--danger); }
+
+    .calendar-scroll{
+      width:100%;
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+    }
+
+    .calendar-grid{
+      display:grid;
+      grid-template-columns: repeat(7, minmax(110px, 1fr));
+      border-top:1px solid var(--border);
+      border-left:1px solid var(--border);
+      background:#fff;
+      min-width:770px;
+    }
+
+    .weekday{
+      background:#f8fafc;
+      border-right:1px solid var(--border);
+      border-bottom:1px solid var(--border);
+      padding:12px 8px;
+      text-align:center;
+      font-weight:800;
+      font-size:12px;
+      color:#64748b;
+      text-transform:uppercase;
+      letter-spacing:.5px;
+      line-height:1.2;
+    }
+
+    .day{
+      min-height:148px;
+      border-right:1px solid var(--border);
+      border-bottom:1px solid var(--border);
+      padding:10px;
+      position:relative;
+      background:#fff;
+      transition:.18s ease;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      min-width:0;
+      cursor:pointer;
+    }
+
+    .day:hover{
+      background:var(--day-hover);
+    }
+
+    .day.weekend{
+      background:var(--weekend);
+    }
+
+    .day.holiday{
+      background:var(--holiday);
+    }
+
+    .day.today{
+      background:var(--today);
+      box-shadow: inset 0 0 0 2px rgba(0,151,206,.20);
+    }
+
+    .day.blocked-window{
+      opacity:.92;
+    }
+
+    .day.empty{
+      min-height:148px;
+      border-right:1px solid var(--border);
+      border-bottom:1px solid var(--border);
+      background:#fff;
+      cursor:default;
+    }
+
+    .day.empty:hover{
+      background:#fff;
+    }
+
+    .day.preenchido{
+      background:var(--filled-bg) !important;
+      box-shadow: inset 0 0 0 2px rgba(34,197,94,.18);
+    }
+
+    .day.bloqueado{
+      background:var(--blocked-bg) !important;
+      box-shadow: inset 0 0 0 2px rgba(239,68,68,.18);
+    }
+
+    .day-number-row{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:8px;
+      min-width:0;
+    }
+
+    .day-number{
+      width:34px;
+      height:34px;
+      border-radius:999px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:800;
+      font-size:14px;
+      color:#111827;
+      flex:0 0 34px;
+      background:#fff;
+    }
+
+    .day.today .day-number{
+      background:var(--primary);
+      color:#fff;
+    }
+
+    .day.preenchido .day-number{
+      background:#22c55e;
+      color:#fff;
+    }
+
+    .day.bloqueado .day-number{
+      background:#ef4444;
+      color:#fff;
+    }
+
+    .tag-mini{
+      font-size:10px;
+      padding:4px 8px;
+      border-radius:999px;
+      font-weight:800;
+      border:1px solid var(--border);
+      background:#fff;
+      color:#555;
+      text-transform:uppercase;
+      letter-spacing:.2px;
+      line-height:1.1;
+      white-space:nowrap;
+      flex-shrink:0;
+    }
+
+    .day-holiday-name{
+      font-size:11px;
+      font-weight:700;
+      color:#b45309;
+      line-height:1.25;
+      min-height:18px;
+      word-break:break-word;
+      overflow-wrap:anywhere;
+    }
+
+    .day-info{
+      margin-top:auto;
+      display:grid;
+      gap:6px;
+      min-width:0;
+    }
+
+    .day-chip{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      width:max-content;
+      max-width:100%;
+      padding:6px 8px;
+      border-radius:10px;
+      font-size:11px;
+      font-weight:700;
+      border:1px solid var(--border);
+      background:#fff;
+      color:#374151;
+      line-height:1.25;
+      white-space:normal;
+      text-align:left;
+    }
+
+    .day-chip.lock{
+      background:#fff1f2;
+      color:#9f1239;
+      border-color:#fecdd3;
+    }
+
+    .meal-list{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      min-width:0;
+    }
+
+    .meal-btn{
+      width:100%;
+      border:none;
+      border-radius:10px;
+      padding:8px 9px;
+      text-align:left;
+      font-size:11px;
+      font-weight:800;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:8px;
+      cursor:pointer;
+      border:1px solid transparent;
+      min-width:0;
+    }
+
+    .meal-btn span{
+      min-width:0;
+      flex:1;
+      white-space:normal;
+      line-height:1.25;
+      word-break:break-word;
+    }
+
+    .meal-btn:hover{
+      filter:brightness(.98);
+      transform:translateY(-1px);
+    }
+
+    .meal-btn.almoco{
+      background:var(--chip-almoco-bg);
+      color:var(--chip-almoco-text);
+      border-color:var(--chip-almoco-border);
+    }
+
+    .meal-btn.janta{
+      background:var(--chip-janta-bg);
+      color:var(--chip-janta-text);
+      border-color:var(--chip-janta-border);
+    }
+
+    .meal-btn.extra{
+      background:var(--chip-extra-bg);
+      color:var(--chip-extra-text);
+      border-color:var(--chip-extra-border);
+    }
+
+    .meal-btn small{
+      font-size:10px;
+      opacity:.9;
+      font-weight:700;
+      flex:0 0 auto;
+      white-space:nowrap;
+      line-height:1.2;
+    }
+
+    .day-helper{
+      font-size:11px;
+      color:#6b7280;
+      line-height:1.35;
+      word-break:break-word;
+      overflow-wrap:anywhere;
+    }
+
+    .footer-note{
+      padding:14px 16px 18px;
+      color:#6b7280;
+      font-size:12px;
+      border-top:1px solid var(--border);
+      background:#fff;
+      line-height:1.4;
+    }
+
+    @media (max-width: 1100px){
+      main{
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar{
+        position:static;
+        order:1;
+      }
+
+      .calendar-wrap{
+        order:2;
+      }
+    }
+
+    @media (max-width: 720px){
+      header{
+        padding:12px 14px;
+        gap:12px;
+      }
+      
+      .brand{
+        width:100%;
+        align-items:flex-start;
+        gap:10px;
+      }
+
+      .brand .logo{
+        width:40px;
+        height:40px;
+        flex-basis:40px;
+        font-size:20px;
+      }
+
+      .brand h1{
+        font-size:18px;
+      }
+
+      .brand p{
+        font-size:12px;
+      }
+
+      .header-actions{
+        width:100%;
+        display:grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap:8px;
+      }
+
+      .header-actions .btn-link,
+      .header-actions button{
+        width:100%;
+        padding:10px 10px;
+        font-size:12px;
+        min-height:40px;
+      }
+
+      main{
+        padding:12px;
+        gap:14px;
+      }
+
+      .pad{
+        padding:12px;
+      }
+
+      .kpi-grid{
+        grid-template-columns: 1fr;
+      }
+
+      .kpi{
+        padding:12px;
+      }
+
+      .kpi .label{
+        font-size:11px;
+      }
+
+      .kpi .value{
+        font-size:24px;
+      }
+
+      .kpi .sub{
+        font-size:11px;
+      }
+
+      .detail-panel{
+        padding:12px;
+      }
+
+      .detail-panel h3{
+        font-size:15px;
+      }
+
+      .detail-empty{
+        font-size:12px;
+      }
+
+      .detail-item{
+        padding:10px;
+      }
+
+      .detail-item-value{
+        font-size:13px;
+      }
+
+      .calendar-toolbar{
+        padding:12px;
+        gap:10px;
+      }
+
+      .calendar-left{
+        width:100%;
+        display:grid;
+        grid-template-columns: 40px 1fr 40px;
+        align-items:center;
+        gap:8px;
+      }
+
+      .calendar-left > button{
+        width:40px;
+        height:40px;
+        padding:0;
+      }
+
+      .calendar-title{
+        min-width:0;
+        font-size:18px;
+      }
+
+      .calendar-subtitle{
+        font-size:11px;
+      }
+
+      .toolbar-group{
+        width:100%;
+        display:grid;
+        grid-template-columns: 1fr 1fr;
+        gap:8px;
+      }
+
+      .toolbar-group select{
+        width:100%;
+        min-width:0;
+        font-size:13px;
+        padding:10px;
+      }
+
+      .status{
+        font-size:12px;
+      }
+
+      .calendar-grid{
+        grid-template-columns: repeat(7, minmax(92px, 1fr));
+        min-width:644px;
+      }
+
+      .weekday{
+        padding:9px 4px;
+        font-size:10px;
+        letter-spacing:.2px;
+      }
+
+      .day{
+        min-height:138px;
+        padding:7px;
+        gap:6px;
+      }
+
+      .day.empty{
+        min-height:138px;
+      }
+
+      .day-number{
+        width:28px;
+        height:28px;
+        flex-basis:28px;
+        font-size:12px;
+      }
+
+      .tag-mini{
+        font-size:9px;
+        padding:3px 6px;
+      }
+
+      .day-holiday-name{
+        font-size:10px;
+        min-height:12px;
+      }
+
+      .meal-list{
+        gap:5px;
+      }
+
+      .meal-btn{
+        padding:7px 7px;
+        font-size:10px;
+        gap:6px;
+        border-radius:8px;
+      }
+
+      .meal-btn small{
+        font-size:9px;
+      }
+
+      .day-chip{
+        font-size:10px;
+        padding:6px 7px;
+        border-radius:8px;
+      }
+
+      .day-helper{
+        font-size:10px;
+        line-height:1.3;
+      }
+
+      .footer-note{
+        font-size:11px;
+        padding:12px;
+      }
+    }
+
+    @media (max-width: 420px){
+      .header-actions{
+        grid-template-columns: 1fr;
+      }
+
+      .calendar-grid{
+        grid-template-columns: repeat(7, minmax(86px, 1fr));
+        min-width:602px;
+      }
+      .meal-btn span{
+    font-size:8px;
+  }
+
+      .day{
+        min-height:132px;
+        padding:6px;
+      }
+
+      .day.empty{
+        min-height:132px;
+      }
+
+      .meal-btn{
+        padding:6px;
+      }
+
+      .meal-btn span{
+        font-size:9px;
+      }
+
+      .meal-btn small{
+        font-size:8px;
+      }
+
+      .day-helper{
+        font-size:9px;
+      }
+    }
+ .modal-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.4);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+}
+
+.modal-box{
+  background:#fff;
+  border-radius:16px;
+  width:90%;
+  max-width:520px; /* menor */
+  box-shadow:0 15px 40px rgba(0,0,0,.25);
+  overflow:hidden;
+}
+
+.modal-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px 18px;
+  border-bottom:1px solid #eee;
+}
+
+.modal-header h2{
+  margin:0;
+  font-size:22px;
+}
+
+.modal-body{
+  padding:18px;
+}
+
+/* CARD INTERNO */
+.modal-card{
+  border:1px solid #e5e7eb;
+  border-radius:14px;
+  padding:16px;
+  box-shadow:0 4px 10px rgba(0,0,0,.05);
+}
+
+/* TÍTULO AZUL */
+.modal-title{
+  font-size:18px;
+  font-weight:800;
+  color:#2563eb;
+  margin-bottom:12px;
+}
+
+/* GRID 2 COLUNAS */
+.modal-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px 20px;
+  font-size:14px;
+}
+
+.modal-item{
+  line-height:1.4;
+}
+
+.modal-item strong{
+  color:#111827;
+}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo">
+        <i class="bi bi-calendar3"></i>
+      </div>
+      <div>
+        <h1>ADD - Página Inicial</h1>
+        <p>Calendário mensal com detalhes por refeição</p>
+      </div>
+    </div>
+
+    <div class="header-actions">
+  <a class="btn-link" href="https://coec-epb.github.io/prestacao_dashboard_1/">
+    <i class="bi bi-file-earmark-text"></i> Abrir formulário
+  </a>
+
+  <a class="btn-link" href="https://coec-epb.github.io/administrador/" style="border-color:#0097CE;color:#0097CE;font-weight:700;">
+  <i class="bi bi-gear"></i> Administração
+</a>
+
+  <button class="secondary" id="btnHoje">
+    <i class="bi bi-calendar-date"></i> Hoje
+  </button>
+
+  <button class="secondary" id="btnAtualizar">
+    <i class="bi bi-arrow-repeat"></i> Atualizar
+  </button>
+
+  <button class="secondary" onclick="logout()">
+    <i class="bi bi-box-arrow-right"></i> Sair
+  </button>
+</div>
+  </header>
+
+  <main>
+    <aside class="sidebar">
+      <div class="card pad">
+        <div class="kpi-grid">
+          <div class="kpi">
+            <div class="label">Mês exibido</div>
+            <div class="value" id="kpiMes">—</div>
+            <div class="sub">Visualização atual do calendário</div>
+          </div>
+
+          <div class="kpi">
+            <div class="label">Dias preenchidos</div>
+            <div class="value" id="kpiPreenchidos">0</div>
+            <div class="sub">Dias com ao menos um lançamento no mês</div>
+          </div>
+
+          <div class="kpi">
+            <div class="label">Dias bloqueados</div>
+            <div class="value" id="kpiBloqueados">0</div>
+            <div class="sub">Dias bloqueados para lançamento</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card pad">
+        <div class="detail-panel">
+          <h3><i class="bi bi-card-list"></i> Detalhes do lançamento</h3>
+          <div id="detailContent" class="detail-empty">
+            Clique em <strong>Almoço</strong>, <strong>Janta</strong> ou <strong>Extra</strong> dentro de um dia preenchido para ver os detalhes aqui.
+          </div>
+        </div>
+      </div>
+
+      <div class="card pad">
+        <div class="legend">
+          <h3><i class="bi bi-palette"></i> Legenda</h3>
+
+          <div class="legend-item">
+            <span class="legend-swatch" style="background:var(--filled-bg)"></span>
+            <span>Dia preenchido</span>
+          </div>
+
+          <div class="legend-item">
+            <span class="legend-swatch" style="background:var(--blocked-bg)"></span>
+            <span>Dia bloqueado</span>
+          </div>
+
+          <div class="legend-item">
+            <span class="legend-swatch" style="background:var(--today)"></span>
+            <span>Hoje</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <section class="card calendar-wrap">
+      <div class="calendar-toolbar">
+        <div class="calendar-left">
+          <button class="secondary" id="btnPrevMes">
+            <i class="bi bi-chevron-left"></i>
+          </button>
+
+          <div>
+            <div class="calendar-title" id="calendarTitle">—</div>
+            <div class="calendar-subtitle" id="calendarSubtitle">Carregando calendário...</div>
+          </div>
+
+          <button class="secondary" id="btnNextMes">
+            <i class="bi bi-chevron-right"></i>
+          </button>
+        </div>
+
+        <div class="toolbar-group">
+          <select id="selectMes"></select>
+          <select id="selectAno"></select>
+        </div>
+      </div>
+
+      <div class="pad" style="padding-bottom:0;">
+        <div id="status" class="status"></div>
+      </div>
+
+      <div class="calendar-scroll">
+        <div class="calendar-grid" id="calendarGrid"></div>
+      </div>
+
+      <div class="footer-note">
+        Desenvolvido por Pedro Fillype – Grupo Energisa
+      </div>
+<div id="modalDetalhe" class="modal-overlay">
+  <div class="modal-box">
+    
+    <div class="modal-header">
+      <h2>Detalhes do Dia</h2>
+      <button onclick="fecharModal()">✕</button>
+    </div>
+
+    <div class="modal-body">
+      <div id="modalConteudo"></div>
+    </div>
+
+  </div>
+</div>
+      
+    </section>
+  </main>
+  
+  <script src="https://coec-epb.github.io/login/auth.js"></script>
+  <script>
+    if (!isLogged()) {
+      logout();
+    }
+    
+    const user = getUser();
+    
+    if (!user || !user.matricula) {
+      logout();
+    }
+
+    const FORM_URL = "https://coec-epb.github.io/prestacao_dashboard_1/";
+
+    // LOGIN TEMPORARIAMENTE DESATIVADO
+    //if (localStorage.getItem("logado") !== "true") logout();
+
+    const state = {
+      current: new Date(),
+      matricula: user.matricula,
+      registrosPorData: new Map(),
+      bloqueados: new Set()
+    };
+    function abrirModalDetalhe(item){
+  const tipo = rotuloTipo(item.tiporefeicao);
+  console.log(item);
+ const html = `
+  <div class="modal-card">
+
+    <div class="modal-title">
+      📅 ${escapeHtml(item.datauso)} — ${escapeHtml(tipo)}
+    </div>
+
+    <div class="modal-grid">
+
+      <div class="modal-item"><strong>ID:</strong> ${escapeHtml(item.id || "-")}</div>
+      <div class="modal-item"><strong>Matrícula:</strong> ${escapeHtml(item.matricula || "-")}</div>
+
+      <div class="modal-item"><strong>Nome:</strong> ${escapeHtml(item.nome || "-")}</div>
+      <div class="modal-item"><strong>Email:</strong> ${escapeHtml(item.email || "-")}</div>
+
+      <div class="modal-item"><strong>Regional:</strong> ${escapeHtml(item.regional || "-")}</div>
+      <div class="modal-item"><strong>Polo:</strong> ${escapeHtml(item.polo || item.localidade || "-")}</div>
+
+      <div class="modal-item"><strong>Horário:</strong> ${escapeHtml(item.horario || "-")}</div>
+      <div class="modal-item"><strong>Localidade:</strong> ${escapeHtml(item.localidade || "-")}</div>
+
+      <div class="modal-item"><strong>Sequência:</strong> ${escapeHtml(item.sequencia || "-")}</div>
+      <div class="modal-item"><strong>OS/RR/SS:</strong> ${escapeHtml(item.osrrss || "-")}</div>
+
+      <div class="modal-item"><strong>Nº ADD:</strong> ${escapeHtml(item.numeroadd || "-")}</div>
+
+    </div>
+
+  </div>
+`;
+  document.getElementById("modalConteudo").innerHTML = html;
+  document.getElementById("modalDetalhe").style.display = "flex";
+}
+
+function fecharModal(){
+  document.getElementById("modalDetalhe").style.display = "none";
+}
+
+    const MESES = [
+      "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+      "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+    ];
+
+    const WEEKDAYS = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
+
+    function setStatus(msg, type=""){
+      const el = document.getElementById("status");
+      if (!el) return;
+      el.textContent = msg || "";
+      el.className = "status " + (type || "");
+    }
+
+    function pad(n){
+      return String(n).padStart(2, "0");
+    }
+
+    function toISODate(date){
+      return `${date.getFullYear()}-${pad(date.getMonth()+1)}-${pad(date.getDate())}`;
+    }
+
+    function normalizarData(date){
+      const d = new Date(date);
+      d.setHours(0,0,0,0);
+      return d;
+    }
+
+    function sameDate(a, b){
+      return a.getFullYear() === b.getFullYear()
+        && a.getMonth() === b.getMonth()
+        && a.getDate() === b.getDate();
+    }
+
+    
+function escapeHtml(str) {
+  return String(str ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+
+    function formatarDataBR(iso){
+      const s = String(iso || "").trim();
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(s)) return s || "-";
+      const [y,m,d] = s.split("-");
+      return `${d}/${m}/${y}`;
+    }
+
+    function formatarDataLonga(date){
+      return date.toLocaleDateString("pt-BR", {
+        weekday: "long",
+        day: "2-digit",
+        month: "long",
+        year: "numeric"
+      });
+    }
+
+    function normalizarTipo(tipo){
+      return String(tipo || "").trim().toUpperCase();
+    }
+
+    function classeTipo(tipo){
+      const t = normalizarTipo(tipo);
+      if (t === "ALMOÇO" || t === "ALMOCO") return "almoco";
+      if (t === "JANTA") return "janta";
+      return "extra";
+    }
+
+    function rotuloTipo(tipo){
+      const t = normalizarTipo(tipo);
+      if (t === "ALMOÇO" || t === "ALMOCO") return "Almoço";
+      if (t === "JANTA") return "Janta";
+      if (t === "EXTRA") return "Extra";
+      return t || "Registro";
+    }
+
+    function calcularPascoa(ano){
+      const a = ano % 19;
+      const b = Math.floor(ano / 100);
+      const c = ano % 100;
+      const d = Math.floor(b / 4);
+      const e = b % 4;
+      const f = Math.floor((b + 8) / 25);
+      const g = Math.floor((b - f + 1) / 3);
+      const h = (19 * a + b - d - g + 15) % 30;
+      const i = Math.floor(c / 4);
+      const k = c % 4;
+      const l = (32 + 2 * e + 2 * i - h - k) % 7;
+      const m = Math.floor((a + 11 * h + 22 * l) / 451);
+      const mes = Math.floor((h + l - 7 * m + 114) / 31);
+      const dia = ((h + l - 7 * m + 114) % 31) + 1;
+      return new Date(ano, mes - 1, dia);
+    }
+
+    function addDias(base, dias){
+      const d = new Date(base);
+      d.setDate(d.getDate() + dias);
+      return d;
+    }
+
+    function getFeriadosAno(ano){
+      const pascoa = calcularPascoa(ano);
+      return [
+        { data: `${ano}-01-01`, nome: "Confraternização Universal" },
+        { data: `${ano}-04-21`, nome: "Tiradentes" },
+        { data: `${ano}-05-01`, nome: "Dia do Trabalho" },
+        { data: `${ano}-09-07`, nome: "Independência do Brasil" },
+        { data: `${ano}-10-12`, nome: "Nossa Senhora Aparecida" },
+        { data: `${ano}-11-02`, nome: "Finados" },
+        { data: `${ano}-11-15`, nome: "Proclamação da República" },
+        { data: `${ano}-11-20`, nome: "Dia da Consciência Negra" },
+        { data: `${ano}-12-25`, nome: "Natal" },
+        { data: toISODate(addDias(pascoa, -48)), nome: "Carnaval" },
+        { data: toISODate(addDias(pascoa, -47)), nome: "Carnaval" },
+        { data: toISODate(addDias(pascoa, -2)), nome: "Sexta-feira Santa" },
+        { data: toISODate(addDias(pascoa, 60)), nome: "Corpus Christi" }
+      ];
+    }
+
+    function getHolidayMap(ano){
+      const map = new Map();
+      getFeriadosAno(ano).forEach(item => map.set(item.data, item.nome));
+      return map;
+    }
+
+    function montarMesAnoSelects(){
+      const mesSel = document.getElementById("selectMes");
+      const anoSel = document.getElementById("selectAno");
+
+      mesSel.innerHTML = MESES.map((m, i) => `<option value="${i}">${m}</option>`).join("");
+
+      const anoAtual = new Date().getFullYear();
+      const anos = [];
+      for (let a = anoAtual - 3; a <= anoAtual + 3; a++){
+        anos.push(`<option value="${a}">${a}</option>`);
+      }
+      anoSel.innerHTML = anos.join("");
+    }
+
+    function atualizarKPIs(ano, mes){
+      let diasPreenchidos = 0;
+      let diasBloqueados = 0;
+
+      for (const [data, lista] of state.registrosPorData.entries()){
+        if (data.startsWith(`${ano}-${pad(mes+1)}-`) && lista.length) diasPreenchidos++;
+      }
+
+      for (const data of state.bloqueados.values()){
+        if (String(data).startsWith(`${ano}-${pad(mes+1)}-`)) diasBloqueados++;
+      }
+
+      document.getElementById("kpiMes").textContent = `${pad(mes+1)}/${ano}`;
+      document.getElementById("kpiPreenchidos").textContent = diasPreenchidos;
+      document.getElementById("kpiBloqueados").textContent = diasBloqueados;
+    }
+
+    async function fetchRegistros(ano, mes){
+      const mapa = new Map();
+      if (!state.matricula) return mapa;
+
+      try {
+        const qs = new URLSearchParams({
+          matricula: state.matricula,
+          mes: pad(mes + 1),
+          ano: String(ano)
+        });
+
+        const resp = await authFetch(`${API}/buscar?${qs.toString()}`);
+        if (!resp.ok) return mapa;
+
+        const json = await resp.json();
+        const lista = Array.isArray(json) ? json : [];
+
+        for (const item of lista) {
+          const datauso = String(item.datauso || "").trim();
+          if (!/^\d{4}-\d{2}-\d{2}$/.test(datauso)) continue;
+
+          if (!mapa.has(datauso)) mapa.set(datauso, []);
+          mapa.get(datauso).push(item);
+        }
+
+        for (const arr of mapa.values()) {
+          arr.sort((a, b) => {
+            const ta = normalizarTipo(a.tiporefeicao);
+            const tb = normalizarTipo(b.tiporefeicao);
+            const ordem = { "ALMOÇO": 1, "ALMOCO": 1, "JANTA": 2, "EXTRA": 3 };
+            return (ordem[ta] || 99) - (ordem[tb] || 99);
+          });
+        }
+
+        return mapa;
+      } catch (err) {
+        console.error("Erro ao buscar registros:", err);
+        return mapa;
+      }
+    }
+
+    async function fetchBloqueados(ano, mes){
+      const set = new Set();
+      if (!state.matricula) return set;
+
+      try {
+        const totalDiasMes = new Date(ano, mes + 1, 0).getDate();
+        const promessas = [];
+
+        for (let dia = 1; dia <= totalDiasMes; dia++) {
+          const datauso = `${ano}-${pad(mes + 1)}-${pad(dia)}`;
+          const qs = new URLSearchParams({
+            matricula: state.matricula,
+            datauso
+          });
+
+          promessas.push(
+            authFetch(`${API}/verificar-bloqueio?${qs.toString()}`)
+              .then(r => r.ok ? r.json() : null)
+              .then(j => (j && j.ok && j.bloqueado) ? datauso : null)
+              .catch(() => null)
+          );
+        }
+
+        const resultados = await Promise.all(promessas);
+        resultados.filter(Boolean).forEach(x => set.add(x));
+        return set;
+      } catch (err) {
+        console.error("Erro ao buscar bloqueados:", err);
+        return set;
+      }
+    }
+
+    function abrirFormularioComData(date){
+      const iso = toISODate(date);
+      window.location.href = `${FORM_URL}?data=${encodeURIComponent(iso)}`;
+    }
+
+    function renderDetalheRegistro(item){
+      const tipo = rotuloTipo(item.tiporefeicao);
+      const cls = classeTipo(item.tiporefeicao);
+      const horario = item.horario || "-";
+      const datauso = formatarDataBR(item.datauso || "");
+      const local = item.localidade || "-";
+      const observacao = item.observacao || "-";
+      const polo = item.polo || "-";
+
+      document.getElementById("detailContent").innerHTML = `
+        <div class="detail-list">
+          <span class="detail-badge ${cls}">
+            <i class="bi bi-utensils"></i> ${escapeHtml(tipo)}
+          </span>
+
+          <div class="detail-item">
+            <div class="detail-item-label">Data</div>
+            <div class="detail-item-value">${escapeHtml(datauso)}</div>
+          </div>
+
+          <div class="detail-item">
+            <div class="detail-item-label">Tipo de refeição</div>
+            <div class="detail-item-value">${escapeHtml(tipo)}</div>
+          </div>
+
+          <div class="detail-item">
+            <div class="detail-item-label">Horário</div>
+            <div class="detail-item-value">${escapeHtml(horario)}</div>
+          </div>
+
+          <div class="detail-item">
+            <div class="detail-item-label">Local</div>
+            <div class="detail-item-value">${escapeHtml(local)}</div>
+          </div>
+
+          <div class="detail-item">
+            <div class="detail-item-label">Polo</div>
+            <div class="detail-item-value">${escapeHtml(polo)}</div>
+          </div>
+
+          <div class="detail-item">
+            <div class="detail-item-label">Observação</div>
+            <div class="detail-item-value">${escapeHtml(observacao)}</div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderMealButtons(registros){
+      if (!registros || !registros.length) return "";
+
+      const html = registros.map((item) => {
+        const cls = classeTipo(item.tiporefeicao);
+        const tipo = rotuloTipo(item.tiporefeicao);
+        const horario = item.horario ? String(item.horario) : "";
+        return `
+          <button
+            type="button"
+            class="meal-btn ${cls}"
+            data-detail='${escapeHtml(JSON.stringify(item))}'>
+            <span>${escapeHtml(tipo)}</span>
+            <small>${escapeHtml(horario || "")}</small>
+          </button>
+        `;
+      }).join("");
+
+      return `<div class="meal-list">${html}</div>`;
+    }
+
+    function renderCalendar(){
+      const grid = document.getElementById("calendarGrid");
+      const ano = state.current.getFullYear();
+      const mes = state.current.getMonth();
+      const hoje = normalizarData(new Date());
+      const holidayMap = getHolidayMap(ano);
+
+      document.getElementById("calendarTitle").textContent = `${MESES[mes]} ${ano}`;
+      document.getElementById("calendarSubtitle").textContent =
+        "Clique em Almoço, Janta ou Extra para ver os detalhes na lateral";
+
+      document.getElementById("selectMes").value = String(mes);
+      document.getElementById("selectAno").value = String(ano);
+
+      atualizarKPIs(ano, mes);
+
+      let html = "";
+      WEEKDAYS.forEach(d => {
+        html += `<div class="weekday">${d}</div>`;
+      });
+
+      const firstDay = new Date(ano, mes, 1);
+      const startWeekDay = firstDay.getDay();
+      const totalDiasMes = new Date(ano, mes + 1, 0).getDate();
+
+      const cells = [];
+
+      for (let i = 0; i < startWeekDay; i++) {
+        cells.push({ empty: true });
+      }
+
+      for (let dia = 1; dia <= totalDiasMes; dia++) {
+        cells.push({
+          empty: false,
+          date: new Date(ano, mes, dia)
+        });
+      }
+
+      while (cells.length % 7 !== 0) {
+        cells.push({ empty: true });
+      }
+
+      cells.forEach(cell => {
+        if (cell.empty) {
+          html += `<div class="day empty"></div>`;
+          return;
+        }
+
+        const date = normalizarData(cell.date);
+        const iso = toISODate(date);
+        const dow = date.getDay();
+        const isWeekend = dow === 0 || dow === 6;
+        const holidayName = holidayMap.get(iso) || "";
+        const isHoliday = !!holidayName;
+        const isToday = sameDate(date, hoje);
+        const isBloqueado = state.bloqueados.has(iso);
+        const registros = state.registrosPorData.get(iso) || [];
+        const isPreenchido = registros.length > 0;
+
+        let classes = ["day"];
+        if (isWeekend) classes.push("weekend");
+        if (isHoliday) classes.push("holiday");
+        if (isToday) classes.push("today");
+        if (isPreenchido) classes.push("preenchido");
+        if (isBloqueado) classes.push("bloqueado");
+
+        let helper = "";
+        
+ if (isBloqueado) {
+          helper = `<div class="day-chip lock"><i class="bi bi-x-circle"></i> Bloqueado</div>`;
+        } else if (isPreenchido) {
+          helper = renderMealButtons(registros);
+        } else {
+          helper = `
+            <div class="day-helper" style="font-weight:700;color:#0097CE;">
+              Toque para lançar
+            </div>
+          `;
+        }
+
+
+        const extraTag = isBloqueado
+          ? `<span class="tag-mini" style="color:#991b1b;">BLOQ</span>`
+          : isPreenchido
+            ? `<span class="tag-mini" style="color:#166534;">LANÇADO</span>`
+            : isWeekend
+              ? `<span class="tag-mini">FDS</span>`
+              : isHoliday
+                ? `<span class="tag-mini">FERIADO</span>`
+                : "";
+
+        html += `
+          <div class="${classes.join(" ")}" data-date="${iso}">
+            <div class="day-number-row">
+              <div class="day-number">${date.getDate()}</div>
+              ${extraTag}
+            </div>
+
+            <div class="day-holiday-name">${escapeHtml(holidayName || "")}</div>
+
+            <div class="day-info">
+              ${helper}
+              <div class="day-helper">${escapeHtml(formatarDataLonga(date))}</div>
+            </div>
+          </div>
+        `;
+      });
+
+      grid.innerHTML = html;
+
+      grid.querySelectorAll(".day").forEach(dayEl => {
+  dayEl.addEventListener("click", () => {
+    const iso = dayEl.getAttribute("data-date");
+    if (!iso) return;
+
+    if (state.bloqueados.has(iso)) return;
+
+    const registros = state.registrosPorData.get(iso) || [];
+    if (registros.length > 0) return;
+
+    abrirFormularioComData(new Date(iso + "T00:00:00"));
+  });
+});
+
+   grid.querySelectorAll(".meal-btn").forEach(btn => {
+  btn.addEventListener("click", (ev) => {
+    ev.stopPropagation();
+
+    const raw = btn.getAttribute("data-detail");
+    if (!raw) return;
+
+    try {
+      const item = JSON.parse(raw);
+
+      // lateral
+      renderDetalheRegistro(item);
+
+      // modal
+      abrirModalDetalhe(item);
+
+      // mobile scroll (opcional)
+      if (window.innerWidth <= 720) {
+        document.querySelector(".detail-panel")?.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      }
+
+    } catch (e) {
+      console.error("Erro ao abrir detalhe:", e);
+    }
+  });
+});
+
+          
+
+      
+
+      setStatus("Calendário carregado com sucesso.", "success");
+    }
+
+    async function carregarDadosDoMes(){
+      const ano = state.current.getFullYear();
+      const mes = state.current.getMonth();
+
+      setStatus("Carregando lançamentos e bloqueios do mês...", "");
+
+      const [registrosPorData, bloqueados] = await Promise.all([
+        fetchRegistros(ano, mes),
+        fetchBloqueados(ano, mes)
+      ]);
+
+      state.registrosPorData = registrosPorData;
+      state.bloqueados = bloqueados;
+
+      renderCalendar();
+    }
+
+    function mudarMes(delta){
+      state.current = new Date(state.current.getFullYear(), state.current.getMonth() + delta, 1);
+      carregarDadosDoMes();
+    }
+
+    (function init(){
+      montarMesAnoSelects();
+
+      const hoje = new Date();
+      state.current = new Date(hoje.getFullYear(), hoje.getMonth(), 1);
+
+      document.getElementById("btnPrevMes").addEventListener("click", () => mudarMes(-1));
+      document.getElementById("btnNextMes").addEventListener("click", () => mudarMes(1));
+
+      document.getElementById("btnHoje").addEventListener("click", () => {
+        const d = new Date();
+        state.current = new Date(d.getFullYear(), d.getMonth(), 1);
+        carregarDadosDoMes();
+      });
+
+      document.getElementById("btnAtualizar").addEventListener("click", carregarDadosDoMes);
+
+      document.getElementById("selectMes").addEventListener("change", (e) => {
+        state.current = new Date(state.current.getFullYear(), Number(e.target.value), 1);
+        carregarDadosDoMes();
+      });
+
+      document.getElementById("selectAno").addEventListener("change", (e) => {
+        state.current = new Date(Number(e.target.value), state.current.getMonth(), 1);
+        carregarDadosDoMes();
+      });
+
+      carregarDadosDoMes();
+    })();
+  </script>
+   <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ab3e837119ed4133bd616d3b06ef0e25"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
