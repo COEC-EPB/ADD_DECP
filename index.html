@@ -1024,31 +1024,87 @@
     <!-- NOVO CARD DO SALDO -->
     <div class="card pad">
 
-        <h3 style="margin-top:0;color:#0097CE;">
-            <i class="bi bi-wallet2"></i>
-            Banco de ADD
-        </h3>
+    <h3 style="
+        margin-top:0;
+        color:#0097CE;
+        display:flex;
+        align-items:center;
+        gap:8px;
+    ">
+        <i class="bi bi-wallet2"></i>
+        Banco de ADD
+    </h3>
 
-        <div class="kpi-grid">
+    <div class="kpi-grid">
 
-            <div class="kpi">
-                <div class="label">Saldo Inicial</div>
-                <div class="value" id="saldoInicial">20</div>
+        <div class="kpi">
+            <div class="label">Saldo Inicial</div>
+            <div class="value" id="saldoInicial">20</div>
+        </div>
+
+        <div class="kpi">
+            <div class="label">Utilizados</div>
+            <div class="value" id="saldoUtilizados">0</div>
+        </div>
+
+        <div class="kpi">
+            <div class="label">Disponível</div>
+            <div class="value"
+                 id="saldoDisponivel"
+                 style="
+                    color:#22c55e;
+                    font-size:38px;
+                 ">
+                20
             </div>
+        </div>
 
-            <div class="kpi">
-                <div class="label">Utilizados</div>
-                <div class="value" id="saldoUtilizados">0</div>
-            </div>
+    </div>
 
-            <div class="kpi">
-                <div class="label">Disponível</div>
-                <div class="value" id="saldoDisponivel">20</div>
-            </div>
+    <div style="margin-top:18px;">
+
+        <div style="
+            display:flex;
+            justify-content:space-between;
+            font-weight:700;
+            margin-bottom:8px;
+        ">
+            <span>Utilização</span>
+            <span id="saldoPercentual">0%</span>
+        </div>
+
+        <div style="
+            width:100%;
+            height:16px;
+            background:#e5e7eb;
+            border-radius:999px;
+            overflow:hidden;
+        ">
+
+            <div
+                id="saldoBarra"
+                style="
+                    width:0%;
+                    height:100%;
+                    background:#22c55e;
+                    transition:.4s;
+                "
+            ></div>
 
         </div>
 
     </div>
+
+    <div style="
+        margin-top:12px;
+        font-size:12px;
+        color:#6b7280;
+        text-align:center;
+    ">
+        Créditos disponíveis para utilização
+    </div>
+
+</div>
 <div class="card pad">
 
     <div class="kpi-grid">
@@ -1184,14 +1240,73 @@
 
         const json = await r.json();
 
+        const inicial =
+            Number(json.saldo?.quantidade_inicial || 0);
+
+        const utilizados =
+            Number(json.saldo?.utilizados || 0);
+
+        const disponivel =
+            Number(json.saldo?.saldo || 0);
+
         document.getElementById("saldoInicial").textContent =
-            json.saldo.quantidade_inicial;
+            inicial;
 
         document.getElementById("saldoUtilizados").textContent =
-            json.saldo.utilizados;
+            utilizados;
 
         document.getElementById("saldoDisponivel").textContent =
-            json.saldo.saldo;
+            disponivel;
+
+        let percentual = 0;
+
+        if(inicial > 0){
+
+            percentual = Math.round(
+                (utilizados / inicial) * 100
+            );
+
+        }
+
+        document.getElementById("saldoPercentual").textContent =
+            percentual + "%";
+
+        const barra =
+            document.getElementById("saldoBarra");
+
+        barra.style.width =
+            percentual + "%";
+
+        const saldoDisponivelEl =
+            document.getElementById("saldoDisponivel");
+
+        if(percentual < 50){
+
+            barra.style.background =
+                "#22c55e";
+
+            saldoDisponivelEl.style.color =
+                "#22c55e";
+
+        }
+        else if(percentual < 80){
+
+            barra.style.background =
+                "#f59e0b";
+
+            saldoDisponivelEl.style.color =
+                "#f59e0b";
+
+        }
+        else{
+
+            barra.style.background =
+                "#ef4444";
+
+            saldoDisponivelEl.style.color =
+                "#ef4444";
+
+        }
 
     }catch(e){
 
