@@ -1020,27 +1020,38 @@
 
   <main>
     <aside class="sidebar">
-      <div class="card pad">
+
+    <!-- NOVO CARD DO SALDO -->
+    <div class="card pad">
+
+        <h3 style="margin-top:0;color:#0097CE;">
+            <i class="bi bi-wallet2"></i>
+            Banco de ADD
+        </h3>
+
         <div class="kpi-grid">
-          <div class="kpi">
-            <div class="label">Mês exibido</div>
-            <div class="value" id="kpiMes">—</div>
-            <div class="sub">Visualização atual do calendário</div>
-          </div>
 
-          <div class="kpi">
-            <div class="label">Dias preenchidos</div>
-            <div class="value" id="kpiPreenchidos">0</div>
-            <div class="sub">Dias com ao menos um lançamento no mês</div>
-          </div>
+            <div class="kpi">
+                <div class="label">Saldo Inicial</div>
+                <div class="value" id="saldoInicial">20</div>
+            </div>
 
-          <div class="kpi">
-            <div class="label">Dias bloqueados</div>
-            <div class="value" id="kpiBloqueados">0</div>
-            <div class="sub">Dias bloqueados para lançamento</div>
-          </div>
+            <div class="kpi">
+                <div class="label">Utilizados</div>
+                <div class="value" id="saldoUtilizados">0</div>
+            </div>
+
+            <div class="kpi">
+                <div class="label">Disponível</div>
+                <div class="value" id="saldoDisponivel">20</div>
+            </div>
+
         </div>
-      </div>
+
+    </div>
+
+   
+      
 
       <div class="card pad">
         <div class="detail-panel">
@@ -1138,6 +1149,33 @@
     }
 
     const FORM_URL = "https://coec-epb.github.io/PRESTACAO-DECP/";
+
+    async function carregarSaldo(){
+
+    try{
+
+        const r = await authFetch(`${API}/saldo-add`);
+
+        if(!r.ok) return;
+
+        const json = await r.json();
+
+        document.getElementById("saldoInicial").textContent =
+            json.saldo.quantidade_inicial;
+
+        document.getElementById("saldoUtilizados").textContent =
+            json.saldo.utilizados;
+
+        document.getElementById("saldoDisponivel").textContent =
+            json.saldo.saldo;
+
+    }catch(e){
+
+        console.error(e);
+
+    }
+
+}
 
     // LOGIN TEMPORARIAMENTE DESATIVADO
     //if (localStorage.getItem("logado") !== "true") logout();
@@ -1679,35 +1717,61 @@ function escapeHtml(str) {
       carregarDadosDoMes();
     }
 
-    (function init(){
-      montarMesAnoSelects();
+    (async function init(){
 
-      const hoje = new Date();
-      state.current = new Date(hoje.getFullYear(), hoje.getMonth(), 1);
+    montarMesAnoSelects();
 
-      document.getElementById("btnPrevMes").addEventListener("click", () => mudarMes(-1));
-      document.getElementById("btnNextMes").addEventListener("click", () => mudarMes(1));
+    const hoje = new Date();
 
-      document.getElementById("btnHoje").addEventListener("click", () => {
-        const d = new Date();
-        state.current = new Date(d.getFullYear(), d.getMonth(), 1);
+    state.current = new Date(
+        hoje.getFullYear(),
+        hoje.getMonth(),
+        1
+    );
+
+    document.getElementById("btnPrevMes").addEventListener("click",()=>mudarMes(-1));
+
+    document.getElementById("btnNextMes").addEventListener("click",()=>mudarMes(1));
+
+    document.getElementById("btnHoje").addEventListener("click",()=>{
+
+        const d=new Date();
+
+        state.current=new Date(d.getFullYear(),d.getMonth(),1);
+
         carregarDadosDoMes();
-      });
 
-      document.getElementById("btnAtualizar").addEventListener("click", carregarDadosDoMes);
+    });
 
-      document.getElementById("selectMes").addEventListener("change", (e) => {
-        state.current = new Date(state.current.getFullYear(), Number(e.target.value), 1);
+    document.getElementById("btnAtualizar").addEventListener("click",async()=>{
+
+        await carregarDadosDoMes();
+
+        await carregarSaldo();
+
+    });
+
+    document.getElementById("selectMes").addEventListener("change",(e)=>{
+
+        state.current=new Date(state.current.getFullYear(),Number(e.target.value),1);
+
         carregarDadosDoMes();
-      });
 
-      document.getElementById("selectAno").addEventListener("change", (e) => {
-        state.current = new Date(Number(e.target.value), state.current.getMonth(), 1);
+    });
+
+    document.getElementById("selectAno").addEventListener("change",(e)=>{
+
+        state.current=new Date(Number(e.target.value),state.current.getMonth(),1);
+
         carregarDadosDoMes();
-      });
 
-      carregarDadosDoMes();
-    })();
+    });
+
+    await carregarDadosDoMes();
+
+    await carregarSaldo();
+
+})();
   </script>
    <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ab3e837119ed4133bd616d3b06ef0e25"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
