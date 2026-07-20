@@ -1230,15 +1230,28 @@
 
     const FORM_URL = "https://coec-epb.github.io/PRESTACAO-DECP/";
 
-    async function carregarSaldo(){
+    async function carregarSaldo(anoParam, mesParam){
 
     try{
 
-        const r = await authFetch(`${API}/saldo-add`);
+        const hoje =
+            new Date();
+
+        const ano =
+            anoParam || hoje.getFullYear();
+
+        const mes =
+            mesParam || hoje.getMonth() + 1;
+
+        const r =
+            await authFetch(
+                `${API}/saldo-add?ano=${ano}&mes=${mes}`
+            );
 
         if(!r.ok) return;
 
-        const json = await r.json();
+        const json =
+            await r.json();
 
         const inicial =
             Number(json.saldo?.quantidade_inicial || 0);
@@ -1248,6 +1261,12 @@
 
         const disponivel =
             Number(json.saldo?.saldo || 0);
+
+        const saldoAnterior =
+            Number(json.saldo?.saldo_anterior || 0);
+
+        const creditoMes =
+            Number(json.saldo?.credito_mes || 0);
 
         document.getElementById("saldoInicial").textContent =
             inicial;
@@ -1262,9 +1281,10 @@
 
         if(inicial > 0){
 
-            percentual = Math.round(
-                (utilizados / inicial) * 100
-            );
+            percentual =
+                Math.round(
+                    (utilizados / inicial) * 100
+                );
 
         }
 
@@ -1307,6 +1327,9 @@
                 "#ef4444";
 
         }
+
+        console.log("Saldo anterior:", saldoAnterior);
+        console.log("Crédito do mês:", creditoMes);
 
     }catch(e){
 
@@ -1849,6 +1872,7 @@ function escapeHtml(str) {
       state.bloqueados = bloqueados;
 
       renderCalendar();
+      await carregarSaldo(2    ano,3    mes + 14);
     }
 
     function mudarMes(delta){
