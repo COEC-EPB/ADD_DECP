@@ -1858,30 +1858,44 @@ function escapeHtml(str) {
     }
 
     async function carregarDadosDoMes(){
-      const ano = state.current.getFullYear();
-      const mes = state.current.getMonth();
 
-      setStatus("Carregando lançamentos e bloqueios do mês...", "");
+  const ano = state.current.getFullYear();
+  const mes = state.current.getMonth();
 
-      const [registrosPorData, bloqueados] = await Promise.all([
-        fetchRegistros(ano, mes),
-        fetchBloqueados(ano, mes)
-      ]);
+  setStatus(
+    "Carregando lançamentos e bloqueios do mês...",
+    ""
+  );
 
-      state.registrosPorData = registrosPorData;
-state.bloqueados = bloqueados;
+  const [registrosPorData, bloqueados] =
+    await Promise.all([
+      fetchRegistros(ano, mes),
+      fetchBloqueados(ano, mes)
+    ]);
 
-renderCalendar();
+  state.registrosPorData = registrosPorData;
+  state.bloqueados = bloqueados;
 
-await carregarSaldo(
+  renderCalendar();
+
+  await carregarSaldo(
     ano,
     mes + 1
-);
+  );
 
-    function mudarMes(delta){
-      state.current = new Date(state.current.getFullYear(), state.current.getMonth() + delta, 1);
-      carregarDadosDoMes();
-    }
+} // <-- ESTAVA FALTANDO
+
+function mudarMes(delta){
+
+  state.current = new Date(
+    state.current.getFullYear(),
+    state.current.getMonth() + delta,
+    1
+  );
+
+  carregarDadosDoMes();
+
+}
 
     (async function init(){
 
